@@ -1,0 +1,101 @@
+/* Global Style */
+@font-face {
+  font-family: Taviraj;
+  src: url(../font/Taviraj-Regular.ttf);
+}
+
+@font-face {
+  font-family: Kalam;
+  src: url(../font/Kalam-Regular.ttf);
+}
+
+:root {
+  --main-black: #1b1d1f;
+  --main-white: #ffffff;
+  --main-blue-1: #435c7d;
+  --main-blue-2: #54739b;
+  --main-blue-3: #6c8ab0;
+  --main-blue-4: #8aa1c0;
+  --main-blue-5: #a7b9d0;
+  font-size: calc(0.7em + 0.9vw);
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Taviraj;
+}
+
+/* End of Global Style */
+
+/* Header */
+#header {
+  background-color: var(--main-blue-1);
+  /* padding: 0.5em 0; */
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+}
+.header-wrapper {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  color: var(--main-white);
+}
+
+#header .title {
+  grid-column: 1/2;
+  text-transform: uppercase;
+}
+
+#header .links {
+  grid-column: 2/3;
+  display: flex;
+  justify-content: space-evenly;
+  text-transform: capitalize;
+}
+
+#header .links .link {
+  font-family: Kalam;
+  text-decoration: none;
+  color: var(--main-white);
+  display: block;
+  padding: 0.2em 2em;
+  border: 1px solid var(--main-white);
+  border-radius: 0.2em;
+  /* letter-spacing: 0.1em; */
+}
+
+#header .links .link:hover {
+  background: var(--main-blue-3);
+}
+/* End of Header */
+
+/* Main */
+#main {
+  background-color: var(--main-blue-4);
+  height: 90vh;
+  position: relative;
+}
+
+#display {
+  padding: 0.5em 1em;
+  background: transparent;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  text-align: center;
+  color: var(--main-black);
+  font-weight: 700;
+}
+/* End of Main */
