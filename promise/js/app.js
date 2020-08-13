@@ -22,12 +22,18 @@ buttonChange.addEventListener("click", async () => {
     await changeColor(h1Two, 1000, "blue");
     await changeColor(h1Three, 1000, "green");
   } catch (error) {
-    let h1Error = document.createElement("H1");
-    h1Error.innerText = error;
-    h1Error.style.color = "red";
-    container.appendChild(h1Error);
+    let err = newElement();
+    err.innerText = error;
+    container.appendChild(err);
   }
 });
+
+function newElement() {
+  let newElement = document.createElement("H1");
+  newElement.style.color = "red";
+
+  return newElement;
+}
 
 function changeColor(element, time, color) {
   return new Promise((resolve, reject) => {
@@ -39,5 +45,42 @@ function changeColor(element, time, color) {
     } else {
       reject(`There is no such element ${element}`);
     }
+  });
+}
+
+const jokeButton = document.querySelector(".button-joke");
+const jokeURL = "https://api.chucknorris.io/jokes/random";
+const jokeH1 = document.querySelector(".joke");
+
+// jokeButton.addEventListener("click", () => {
+//   getJoke(jokeURL)
+//     .then((joke) => (jokeH1.innerText = joke))
+//     .catch((error) => (jokeH1.innerText = error));
+// });
+
+jokeButton.addEventListener("click", async () => {
+  try {
+    let response = await getJoke(jokeURL);
+    jokeH1.innerText = response;
+  } catch (error) {
+    jokeH1.innerText = error;
+  }
+});
+
+function getJoke(url) {
+  return new Promise((resolve, reject) => {
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", jokeURL);
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          let { value: joke } = JSON.parse(xhr.responseText);
+          resolve(joke);
+        } else {
+          reject(`Get remote data error from ${url}`);
+        }
+      }
+    };
+    xhr.send();
   });
 }
