@@ -49,38 +49,48 @@ function changeColor(element, time, color) {
 }
 
 const jokeButton = document.querySelector(".button-joke");
-const jokeURL = "https://api.chucknorris.io/jokes/random";
+const jokeURL = "https://api.chucknorris.io/jokes/rando";
 const jokeH1 = document.querySelector(".joke");
 
+// // using then() catch()
 // jokeButton.addEventListener("click", () => {
 //   getJoke(jokeURL)
 //     .then((joke) => (jokeH1.innerText = joke))
 //     .catch((error) => (jokeH1.innerText = error));
 // });
 
-jokeButton.addEventListener("click", async () => {
-  try {
-    let response = await getJoke(jokeURL);
-    jokeH1.innerText = response;
-  } catch (error) {
-    jokeH1.innerText = error;
-  }
-});
+// using async/await
+// jokeButton.addEventListener("click", async () => {
+//   try {
+//     let response = await getJoke(jokeURL);
+//     jokeH1.innerText = response;
+//   } catch (error) {
+//     jokeH1.innerText = error;
+//   }
+// });
 
-function getJoke(url) {
-  return new Promise((resolve, reject) => {
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", jokeURL);
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-          let { value: joke } = JSON.parse(xhr.responseText);
-          resolve(joke);
-        } else {
-          reject(`Get remote data error from ${url}`);
-        }
-      }
-    };
-    xhr.send();
-  });
-}
+// function getJoke(url) {
+//   return new Promise((resolve, reject) => {
+//     let xhr = new XMLHttpRequest();
+//     xhr.open("GET", jokeURL);
+//     xhr.onreadystatechange = () => {
+//       if (xhr.readyState === XMLHttpRequest.DONE) {
+//         if (xhr.status === 200) {
+//           let { value: joke } = JSON.parse(xhr.responseText);
+//           resolve(joke);
+//         } else {
+//           reject(`Get remote data error from ${url}`);
+//         }
+//       }
+//     };
+//     xhr.send();
+//   });
+// }
+
+// using fetch
+jokeButton.addEventListener("click", () => {
+  fetch(jokeURL)
+    .then((data) => data.json())
+    .then((data) => (jokeH1.innerText = data.value))
+    .catch((error) => console.log(`${error} ${error}`));
+});
