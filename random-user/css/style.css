@@ -1,0 +1,83 @@
+@font-face {
+  src: url(../static/fonts/Ledger-Regular.ttf);
+  font-family: ledger;
+}
+
+*,
+*::after,
+*:before {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: ledger;
+  margin: 0 auto;
+}
+
+.first-half {
+  background: black;
+  color: white;
+  height: 50vh;
+}
+
+.second-half {
+  background: rgb(230, 219, 219);
+  height: 50vh;
+}
+
+.card {
+  width: 50%;
+  height: 50%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card-top {
+  background: rgb(245, 214, 214);
+  height: 35%;
+  border-bottom: 1px solid darkgreen;
+  position: relative;
+}
+
+.card-bottom {
+  background: rgb(248, 240, 240);
+  height: 65%;
+  padding-top: 3em;
+  text-align: center;
+}
+
+.user-image {
+  position: absolute;
+  bottom: -33%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.user-image > img {
+  border-radius: 50%;
+  border: 5px solid lightcyan;
+}
+
+.user-header {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-wrap: break-word;
+}
+
+.user-btns {
+  width: 70%;
+  margin: 1em auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.user-btns > button {
+  color: darkmagenta;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
