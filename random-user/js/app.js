@@ -2,14 +2,10 @@ import getNewUser from "./utils/getNewUser.js";
 
 const showUserInfo = async () => {
   currentUser = await getNewUser(randomUserURL);
-  let {
-    name: { first, last, title },
-    picture: { large: image },
-  } = currentUser;
 
-  userImage.src = image;
+  userImage.src = currentUser.image;
   userTitle.innerText = `My name is`;
-  userTitleDetails.innerText = `${title} ${first} ${last}`;
+  userTitleDetails.innerText = currentUser.name;
 };
 
 const randomUserURL = "https://randomuser.me/api/";
@@ -25,40 +21,9 @@ let currentUser;
 
 [...userBtns].forEach((btn) => {
   btn.addEventListener("mouseover", (event) => {
-    switch (event.currentTarget.dataset.type) {
-      case "name": {
-        userImage.src = currentUser.picture.large;
-        let { first, last, title } = currentUser.name;
-        userTitle.innerText = `My name is`;
-        userTitleDetails.innerText = `${title} ${first} ${last}`;
-        break;
-      }
-      case "email": {
-        userTitle.innerText = `My email is`;
-        userTitleDetails.innerText = currentUser.email;
-        break;
-      }
-      case "dob": {
-        userTitle.innerText = `My dob is`;
-        userTitleDetails.innerText = currentUser.dob.date.slice(0, 10);
-        break;
-      }
-      case "address": {
-        userTitle.innerText = `My city is`;
-        userTitleDetails.innerText = currentUser.location.city;
-        break;
-      }
-      case "phone": {
-        userTitle.innerText = `My cell phone is`;
-        userTitleDetails.innerText = currentUser.cell;
-        break;
-      }
-      case "password": {
-        userTitle.innerText = `My password is`;
-        userTitleDetails.innerText = currentUser.login.password;
-        break;
-      }
-    }
+    let type = event.currentTarget.dataset.type;
+    userTitle.innerText = `My ${type} is`;
+    userTitleDetails.innerText = currentUser[type];
   });
 });
 
